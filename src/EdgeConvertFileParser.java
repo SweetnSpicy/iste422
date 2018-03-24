@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
+/**
+ * Changes have been made in this file after submitting Milestone #1. Scroll down this file to view them (marked in / * * /). 
+ */
 public class EdgeConvertFileParser {
    //private String filename = "test.edg";
    private File parseFile;
@@ -51,7 +54,11 @@ public class EdgeConvertFileParser {
             } else {
                style = currentLine.substring(currentLine.indexOf("\"") + 1, currentLine.lastIndexOf("\"")); //get the Style parameter
                if (style.startsWith("Relation")) { //presence of Relations implies lack of normalization
-                  JOptionPane.showMessageDialog(null, "The Edge Diagrammer file\n" + parseFile + "\ncontains relations.  Please resolve them and try again.");
+                  /*
+                    Previously used the default pop-up that was already in this file. Using the same message, it's now 
+                    a warning for bad normalization due to relations found in the parsed file.
+                  */
+                  System.out.println("WARNING: Relations found in The Edge Diagrammer file\n" + parseFile + "\nare affecting normalization.  Please remove them and try again.");
                   EdgeConvertGUI.setReadSuccess(false);
                   break;
                } 
@@ -67,7 +74,11 @@ public class EdgeConvertFileParser {
                currentLine = br.readLine().trim(); //this should be Text
                text = currentLine.substring(currentLine.indexOf("\"") + 1, currentLine.lastIndexOf("\"")).replaceAll(" ", ""); //get the Text parameter
                if (text.equals("")) {
-                  JOptionPane.showMessageDialog(null, "There are entities or attributes with blank names in this diagram.\nPlease provide names for them and try again.");
+                  /*
+                    This line was one of the places which caused only 2/4 out of the 5 files from Milestone#1 to load.
+                    Now, the expected output should inform the client about the null pointer(s).
+                  */
+                  System.out.println("NULL POINTER: There are entities or attributes with blank names in this diagram.\nPlease provide names for them and try again.");
                   EdgeConvertGUI.setReadSuccess(false);
                   break;
                }
@@ -85,7 +96,10 @@ public class EdgeConvertFileParser {
                
                if (isEntity) { //create a new EdgeTable object and add it to the alTables ArrayList
                   if (isTableDup(text)) {
-                     JOptionPane.showMessageDialog(null, "There are multiple tables called " + text + " in this diagram.\nPlease rename all but one of them and try again.");
+                     /*
+                       This line now clearly states that there cannot be more than one instance of a table.
+                     */
+                     System.out.println("ERROR: Cannot have duplicate tables.\nThere are multiple tables called " + text + " in this diagram.\nPlease rename all but one of them and try again.");
                      EdgeConvertGUI.setReadSuccess(false);
                      break;
                   }
@@ -157,7 +171,10 @@ public class EdgeConvertFileParser {
          }
          
          if (connectors[cIndex].getIsEP1Field() && connectors[cIndex].getIsEP2Field()) { //both endpoints are fields, implies lack of normalization
-            JOptionPane.showMessageDialog(null, "The Edge Diagrammer file\n" + parseFile + "\ncontains composite attributes. Please resolve them and try again.");
+            /*
+              This line now specifically indicates that an error occurs among the attributes; that is, there cannot be composite attributes.
+            */
+            System.out.println("ATTRIBUTE ERROR: The Edge Diagrammer file\n" + parseFile + "\ncontains composite attributes. Please resolve them and try again.");
             EdgeConvertGUI.setReadSuccess(false); //this tells GUI not to populate JList components
             break; //stop processing list of Connectors
          }
@@ -165,7 +182,10 @@ public class EdgeConvertFileParser {
          if (connectors[cIndex].getIsEP1Table() && connectors[cIndex].getIsEP2Table()) { //both endpoints are tables
             if ((connectors[cIndex].getEndStyle1().indexOf("many") >= 0) &&
                 (connectors[cIndex].getEndStyle2().indexOf("many") >= 0)) { //the connector represents a many-many relationship, implies lack of normalization
-               JOptionPane.showMessageDialog(null, "There is a many-many relationship between tables\n\"" + tables[table1Index].getName() + "\" and \"" + tables[table2Index].getName() + "\"" + "\nPlease resolve this and try again.");
+               /*
+                 This line now clearly states that normalization is poorly affected by a many-to-many relationship.
+               */
+               System.out.println("There is a many-many relationship between tables\n\"" + tables[table1Index].getName() + "\" and \"" + tables[table2Index].getName() + "\"" + "\nPlease resolve this and try again.");
                EdgeConvertGUI.setReadSuccess(false); //this tells GUI not to populate JList components
                break; //stop processing list of Connectors
             } else { //add Figure number to each table's list of related tables
@@ -184,14 +204,20 @@ public class EdgeConvertFileParser {
                fields[fieldIndex].setTableID(tables[table2Index].getNumFigure()); //tell the field what table it belongs to
             }
          } else if (fieldIndex >=0) { //field has already been assigned to a table
-            JOptionPane.showMessageDialog(null, "The attribute " + fields[fieldIndex].getName() + " is connected to multiple tables.\nPlease resolve this and try again.");
+            /*
+              This line was previously misunderstood as the error of having duplicate tables (line 102). Now, it specifically states that various indiv              idual tables have the same unique identifier.
+            */
+            System.out.println("ERROR: DUPLICATE INDEX.\nThe attribute " + fields[fieldIndex].getName() + " is connected to multiple tables.\nPlease resolve this and try again.");
             EdgeConvertGUI.setReadSuccess(false); //this tells GUI not to populate JList components
             break; //stop processing list of Connectors
          }
       } // connectors for() loop
    } // resolveConnectors()
    
-   public void parseSaveFile() throws IOException { //this method is fucked
+   /*
+     Note: this method was previously the main reason some files weren't recognized. 
+   */
+   public void parseSaveFile() throws IOException { 
       StringTokenizer stTables, stNatFields, stRelFields, stNatRelFields, stField;
       EdgeTable tempTable;
       EdgeField tempField;
@@ -299,11 +325,17 @@ public class EdgeConvertFileParser {
                br.close();
                this.makeArrays(); //convert ArrayList objects into arrays of the appropriate Class type
             } else { //the file chosen is something else
-               JOptionPane.showMessageDialog(null, "Unrecognized file format");
+               /*
+                 Was previously a blank pop-up. Now, this error message should display when file(s) cannot be parsed.
+               */
+               System.err.println("PARSE ERROR: The file, "+inputFile+", can't be used. Find the correct file this time, and parse that instead.");
             }
          }
       } // try
       catch (FileNotFoundException fnfe) {
+         /*
+           Was previously a blank pop-up. Now, this error message should display when file(s) cannot be parsed.
+         */
          System.out.println("Cannot find \"" + inputFile.getName() + "\".");
          System.exit(0);
       } // catch FileNotFoundException
