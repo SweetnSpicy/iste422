@@ -1,3 +1,6 @@
+# Test Plan
+See TestPlan.md in this directory.
+
 # Testing SQL output
 Because of the infinite loop when attempting to create the ddl file, we created an example sql file of what the sql output should be. To test this you will need mysql installed. First run the mysql script using the following command
     
@@ -16,20 +19,25 @@ Then run using:
 
     java -cp .:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore TestCreateSQL
 
-All the test should pass.
+All the tests should pass.
 
-## EdgeTableTest README
-You should have our files and both the jars and source code comiled as done in the workingExample.tar. You hsould have them all in the same directory.
-First you need to compile the file (this command assumes the necessary jar is in the same directory as all the files):
+# How to run jUnit tests
+You should see a bunch of java and class files along with two jars and all inside the same directory as this file.
+First you need to compile the test file (this command assumes the necessary jar is in the same directory as all the files):
 
-    javac -cp .:junit-4.12.jar:hamcrest-core-1.3.jar EdgeTableTest.java
+    javac -cp .:junit-4.12.jar:hamcrest-core-1.3.jar TestFileName.java
 
 Next you can run the tests using:
 
-    java -cp .:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore EdgeTableTest
+    java -cp .:junit-4.12.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore TestFileName
 
-Important to note that some of these tests fail and will have their code fixed later in the project. For those tests I made comments directly above the test in the testing file for explanation.
+This should work for all the testing files. Important to note that some of these tests fail and will have their code fixed later in the project. For those tests there should be comments directly above the test in the testing file for explanation or in this README.
 
+List of testing files:
+- EdgeTableTest.java
+- EdgeConvertFileParser.java
+- CreateDDLMySQLTest.java
+- EdgeFieldTest.java
 
 
 # Test for "EdgeConvertFileParser.java":
