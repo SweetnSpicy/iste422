@@ -14,12 +14,11 @@ public class EdgeConvertFileParserTest {
 
   @Before
   public void initialize() throws Exception {
-    file = null;
+    file = new File("createSQL.sql");
+    testParser = new EdgeConvertFileParser(file);
   }
   
   public void prepareParser() throws Exception {
-    file = new File("EdgeConvertFileParser.java");
-    testParser = new EdgeConvertFileParser(file);
     runner();  
   }
 
