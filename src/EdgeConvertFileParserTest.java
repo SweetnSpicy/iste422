@@ -1,21 +1,38 @@
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.*;  
 import java.io.*;
 
 /**
-* This test file contains tests on the remaining files from the finalProjCode, using methods from the already defined classes,
-*  and reusing some of them within only the methods that are responsible for file handling.
-*/
+ * This test file contains tests on the remaining files from the finalProjCode, using methods from the already defined classes,
+ *  and reusing some of them within only the methods that are responsible for file handling.
+ */
 public class EdgeConvertFileParserTest {
   EdgeConvertFileParser testParser;
-  File file = new File("Courses.edg");
+  File file;
 
   @Before
+  public void initialize() throws Exception {
+    file = null;
+  }
+  
   public void prepareParser() throws Exception {
+    file = new File("EdgeConvertFileParser.java");
     testParser = new EdgeConvertFileParser(file);
+    runner();  
   }
 
+  public void runner(){
+    testParseEdgeFile();
+    testParseSaveFile();
+    testGetEdgeTables();
+    testGetEdgeFields();
+    test1OpenFile();
+    test2OpenFile();
+    test3OpenFile();
+    test4OpenFile();
+  }
 
   /**
    * Test the testParseEdgeFile() method from EdgeConvertFileParser.java file, on 4 of the 5 files from finalProjCode
@@ -25,9 +42,9 @@ public class EdgeConvertFileParserTest {
   public void testParseEdgeFile() {
      try{
        testParser.parseEdgeFile();
-       fail(); 
+        
      } catch(Exception e){ 
-        assertEquals("File is not readable. Please try again.", e.getMessage());
+        fail("File is not readable. Please try again.");
      }
   }
     
@@ -39,9 +56,9 @@ public class EdgeConvertFileParserTest {
   public void testParseSaveFile() {
      try{
        testParser.parseSaveFile();
-       fail(); 
+        
      } catch(Exception e){ 
-        assertEquals("The file you entered cannot be saved. Try a different file.", e.getMessage());
+        fail("The file you entered cannot be saved. Try a different file.");
      }
   }
 
@@ -53,10 +70,10 @@ public class EdgeConvertFileParserTest {
   public void testGetEdgeTables() {
      try{
        testParser.getEdgeTables();
-       fail();
+       
      }
      catch(Exception e){
-       assertEquals("The table is not defined. Please retrieve a different table.", e.getMessage());
+       fail("The table is not defined. Please retrieve a different table.");
      }
   }
 
@@ -68,10 +85,10 @@ public class EdgeConvertFileParserTest {
   public void testGetEdgeFields() {
      try{
        testParser.getEdgeFields();
-       fail();
+       
      }
      catch(Exception e){
-       assertEquals("There's no such field defined. Please select a different field.", e.getMessage());
+       fail("There's no such field defined. Please select a different field.");
      }
   }
 
@@ -83,9 +100,9 @@ public class EdgeConvertFileParserTest {
 	     try{
                file = new File("Courses.edg");
 	       testParser.openFile(file);
-	       fail(); 
+	        
 	     } catch(Exception e){ 
-		assertEquals("File not found, and cannot open. Please use a different file.", e.getMessage());
+		fail("File not found, and cannot open. Please use a different file.");
 	     }
 	  }
 
@@ -94,9 +111,9 @@ public class EdgeConvertFileParserTest {
 	     try{
                file = new File("CreateDDLMySQL.java");
 	       testParser.openFile(file);
-	       fail(); 
+	        
 	     } catch(Exception e){ 
-		assertEquals("File not found, and cannot open. Please use a different file.", e.getMessage());
+		fail("File not found, and cannot open. Please use a different file.");
 	     }
 	  }
 
@@ -105,9 +122,9 @@ public class EdgeConvertFileParserTest {
 	     try{
                file = new File("EdgeConvertCreateDDL.java");
 	       testParser.openFile(file);
-	       fail(); 
+	        
 	     } catch(Exception e){ 
-		assertEquals("File not found, and cannot open. Please use a different file.", e.getMessage());
+		fail("File not found, and cannot open. Please use a different file.");
 	     }
 	  }
 
@@ -116,9 +133,9 @@ public class EdgeConvertFileParserTest {
 	     try{
                file = new File("RunEdgeConvert.java");
 	       testParser.openFile(file);
-	       fail(); 
+	        
 	     } catch(Exception e){ 
-		assertEquals("File not found, and cannot open. Please use a different file.", e.getMessage());
+		fail("File not found, and cannot open. Please use a different file.");
 	     }
 	  }
 }
