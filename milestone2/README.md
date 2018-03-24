@@ -8,3 +8,13 @@ We will also be taking the backlog idea. If there are issues with submission for
 
 Our Milestone 1 was not completed, so we have been using the SDLC method discussed above to try and rectify the problems, most notibly communication and organization.
 
+
+# Flowchart
+
+In this directory there should be a flowchart1.png and a flowchart2.png. The first one should be a rough outline of how the user can go through which clases are called when the user does certain actions. The second one is a more detailed rough UML diagram.
+
+# Authors
+Regina Locicero
+Cauldierre McKay
+David Luong
+Joshua Berk
