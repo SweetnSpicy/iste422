@@ -83,9 +83,22 @@ public class EdgeTableTest {
      */
     @Test
     public void testSetRelatedField(){
-        defaultTest.setRelatedField(0,10);
-        int [] relatedFields = defaultTest.getRelatedFieldsArray();
-        assertEquals("Should have set the 0 index of related fields to 10", 10, relatedFields[0]);
+        int [] relatedFields = null;
+        try {    
+            defaultTest.setRelatedField(0,10);
+            relatedFields = defaultTest.getRelatedFieldsArray();
+        }
+        catch(NullPointerException e){
+            relatedFields = null;
+        }
+        finally{
+            if (relatedFields == null){
+                assertEquals("Should have set the 0 index of related fields to 10", 10, relatedFields);
+            }
+            else{
+                assertEquals("Should have set the 0 index of related fields to 10", 10, relatedFields[0]);
+            }
+        }
     }
 
     /*
