@@ -1,1 +1,6 @@
-This is a change.
+git checkout - switch to a branch
+git branch - create a new branch
+git merge - merge a branch with current
+git commit - commit changes to branch
+git push - push changes to repository
+git pull - ?
