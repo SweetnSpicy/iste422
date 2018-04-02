@@ -3,4 +3,5 @@ git branch - create a new branch
 git merge - merge a branch with current
 git commit - commit changes to branch
 git push - push changes to repository
+git fetch - updates branch to most recent version
 git pull - ?
