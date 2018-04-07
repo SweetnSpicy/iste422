@@ -11,9 +11,7 @@
     <javac
       srcdir="src/main"
       destdir="bin/build"
-      fork="yes">
-      
-      
+      verbose="true">
     </javac>
   </target>
 
@@ -25,5 +23,32 @@
       classpath="bin/build">
 
     </java>
-  </target>  
+  </target>
+
+  <!-- testing classpath -->
+  <path id="junit.class.path">
+    <pathelement location="lib/junit-4.12.jar" />
+    <pathelement location="lib/hamcrest-core-1.3.jar" />
+    <pathelement location="src/main" />
+    <pathelement location="src/test" />
+  </path>
+
+  <!-- compile test code -->
+  <target name="test.compile" depends="clean" description="compile the test">
+    <javac
+      srcdir="src/main"
+      destdir="bin/test"
+      verbose="true">
+      <classpath refid="junit.class.path" />
+    </javac>
+  </target>
+
+  <!-- run the test -->
+  <target name="test" depends="test.compile" description="run the tests">
+    <junit>
+      <classpath refid="junit.class.path" />
+      <formatter type="brief" usefile="false" />
+      <test name="MainTester" fork="true" />
+    </junit>
+  </target>
 </project>
