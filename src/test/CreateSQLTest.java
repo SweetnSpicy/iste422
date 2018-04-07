@@ -11,7 +11,7 @@ import java.io.FileReader;
  * Java class that tests the SQL output
  * author: Regina Locicero
  */
-public class TestCreateSQL {
+public class CreateSQLTest {
 
     File result;
 

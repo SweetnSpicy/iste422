@@ -1,7 +1,8 @@
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.*;  
+import org.junit.runner.*;
+import org.junit.fail;
 import java.io.*;
 
 /**
