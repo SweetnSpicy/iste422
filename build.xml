@@ -29,14 +29,12 @@
   <path id="junit.class.path">
     <pathelement location="lib/junit-4.12.jar" />
     <pathelement location="lib/hamcrest-core-1.3.jar" />
-    <pathelement location="src/main" />
-    <pathelement location="src/test" />
   </path>
 
   <!-- compile test code -->
   <target name="test.compile" depends="clean" description="compile the test">
     <javac
-      srcdir="src/main"
+      srcdir="src"
       destdir="bin/test"
       verbose="true">
       <classpath refid="junit.class.path" />
