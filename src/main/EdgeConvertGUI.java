@@ -33,6 +33,7 @@ public class EdgeConvertGUI {
    private EdgeField[] fields; //master copy of EdgeField objects
    private EdgeTable currentDTTable, currentDRTable1, currentDRTable2; //pointers to currently selected table(s) on Define Tables (DT) and Define Relations (DR) screens
    private EdgeField currentDTField, currentDRField1, currentDRField2; //pointers to currently selected field(s) on Define Tables (DT) and Define Relations (DR) screens
+	//JTextArea output;
    private static boolean readSuccess = true; //this tells GUI whether to populate JList components or not
    private boolean dataSaved = true;
    private ArrayList alSubclasses, alProductNames;
@@ -1293,7 +1294,15 @@ public class EdgeConvertGUI {
          if ((ae.getSource() == jmiDTHelpAbout) || (ae.getSource() == jmiDRHelpAbout)) {
             JOptionPane.showMessageDialog(null, "EdgeConvert ERD To DDL Conversion Tool\n" +
                                                 "by Stephen A. Capperell\n" +
-                                                "c 2007-2008");
+                                                "c 2007-2008\n"+
+                                                "This program is used to convert .edg files into DDL of the chosen language.\n"+
+                                                "We have made revisions since Stephen A. Capperall.\n"+
+                                                "Author:\n"+
+                                                "Regina Locicero\n"+
+                                                "Cauldierre McKay\n"+
+                                                "David Luong\n"+
+                                                "Joshua Berk\n"+
+                                                "c 2018");
          }
       } // EdgeMenuListener.actionPerformed()
    } // EdgeMenuListener
