@@ -11,8 +11,14 @@
     <javac
       srcdir="src/main"
       destdir="bin/build"
-      verbose="true">
-    </javac>
+      verbose="true"
+    />
+
+    <javac
+      srcdir="src/convClasses"
+      destdir="bin/build/convClasses"
+      verbose="true"
+    />
   </target>
 
   <!-- run program -->
