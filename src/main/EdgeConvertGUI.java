@@ -1295,6 +1295,9 @@ public class EdgeConvertGUI {
                                                 "by Stephen A. Capperell\n" +
                                                 "c 2007-2008");
          }
+         if ((ae.getSource() == jmiDTHelpOutput) || (ae.getSource() == jmiDRHelpOutput)){
+            JOptionPane.showMessageDialog(null, "Add text here");
+         }
       } // EdgeMenuListener.actionPerformed()
    } // EdgeMenuListener
 } // EdgeConvertGUI
