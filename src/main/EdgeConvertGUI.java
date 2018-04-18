@@ -1304,6 +1304,9 @@ public class EdgeConvertGUI {
                                                 "Joshua Berk\n"+
                                                 "c 2018");
          }
+         if ((ae.getSource() == jmiDTHelpOutput) || (ae.getSource() == jmiDRHelpOutput)){
+            JOptionPane.showMessageDialog(null, "Add text here");
+         }
       } // EdgeMenuListener.actionPerformed()
    } // EdgeMenuListener
 } // EdgeConvertGUI
