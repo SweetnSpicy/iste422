@@ -1332,6 +1332,9 @@ public class EdgeConvertGUI {
          if ((ae.getSource() == jmiDTHelpOutput) || (ae.getSource() == jmiDRHelpOutput)){
             JOptionPane.showMessageDialog(null, "Add text here");
          }
+         if ((ae.getSource() == jmiDTHelpEdge) || (ae.getSource() == jmiDRHelpEdge)){
+            JOptionPane.showMessageDialog(null, "To open an edge file go to File->Open Edge File then use the popup pane to find and select your .edg file.");
+         }
       } // EdgeMenuListener.actionPerformed()
    } // EdgeMenuListener
 } // EdgeConvertGUI
