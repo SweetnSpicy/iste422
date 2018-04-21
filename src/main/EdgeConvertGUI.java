@@ -1330,7 +1330,12 @@ public class EdgeConvertGUI {
                                                 "c 2018");
          }
          if ((ae.getSource() == jmiDTHelpOutput) || (ae.getSource() == jmiDRHelpOutput)){
-            JOptionPane.showMessageDialog(null, "Add text here");
+            JOptionPane.showMessageDialog(null, "The System allows for changing the default Output directory." +
+                    "\n In order to do so, click the 'Options' tab and then 'Set Output File Definition Location'. \n" +
+                    "A File Explorer will then display, and you can sift through your folders to find your specific Output Directory.\n" +
+                    "--Note: An error is thrown if you select a folder not containing a DDL Output file.--\n" +
+                    "Upon pressing 'OK', the Output location shall change, and all other activities completed will finish in the selected" +
+                    "directory.");
          }
       } // EdgeMenuListener.actionPerformed()
    } // EdgeMenuListener
