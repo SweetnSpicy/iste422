@@ -59,8 +59,8 @@ public class EdgeConvertGUI {
 
    //Define Relations screen objects
    static JFrame jfDR;
-   static JPanel jpDRBottom, jpDRCenter, jpDRCenter1, jpDRCenter2, jpDRCenter3, jpDRCenter4;
-   static JButton jbDRCreateDDL, jbDRDefineTables, jbDRBindRelation;
+   static JPanel jpDRTop, jpDRBottom, jpDRCenter, jpDRCenter1, jpDRCenter2, jpDRCenter3, jpDRCenter4;
+   static JButton jbDRBack, jbDRCreateDDL, jbDRDefineTables, jbDRBindRelation;
    static JList jlDRTablesRelations, jlDRTablesRelatedTo, jlDRFieldsTablesRelations, jlDRFieldsTablesRelatedTo;
    static DefaultListModel dlmDRTablesRelations, dlmDRTablesRelatedTo, dlmDRFieldsTablesRelations, dlmDRFieldsTablesRelatedTo;
    static JLabel jlabDRTablesRelations, jlabDRTablesRelatedTo, jlabDRFieldsTablesRelations, jlabDRFieldsTablesRelatedTo;
@@ -68,6 +68,10 @@ public class EdgeConvertGUI {
    static JMenuBar jmbDRMenuBar;
    static JMenu jmDRFile, jmDROptions, jmDRHelp;
    static JMenuItem jmiDROpenEdge, jmiDROpenSave, jmiDRSave, jmiDRSaveAs, jmiDRExit, jmiDROptionsOutputLocation, jmiDROptionsShowProducts, jmiDRHelpAbout, jmiDRHelpRelations, jmiDRHelpOutput, jmiDRHelpEdge, jmiDRHelpTables;
+
+   public static void main(String [] args){
+      new EdgeConvertGUI();
+   }
 
    public EdgeConvertGUI() {
       menuListener = new EdgeMenuListener();
@@ -550,6 +554,8 @@ public class EdgeConvertGUI {
       jmiDRHelpAbout.setMnemonic(KeyEvent.VK_A);
       jmiDRHelpAbout.addActionListener(menuListener);
       jmDRHelp.add(jmiDRHelpAbout);
+      
+      jpDRTop = new JPanel();
 
       jpDRCenter = new JPanel(new GridLayout(2, 2));
       jpDRCenter1 = new JPanel(new BorderLayout());
@@ -644,6 +650,23 @@ public class EdgeConvertGUI {
          }
       );
 
+
+      jbDRBack = new JButton("Back");      
+      jbDRBack.setToolTipText("Go back to "+DEFINE_TABLES);
+      jbDRBack.addActionListener(
+         new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+               jfDT.setVisible(true); //show the Define Tables screen
+               jfDR.setVisible(false);               
+               clearDRControls();
+               depopulateLists();
+               populateLists();               
+            }
+         }
+      );
+      jpDRTop.setLayout(new FlowLayout(FlowLayout.LEFT));
+      jpDRTop.add(jbDRBack);
+
       jspDRTablesRelations = new JScrollPane(jlDRTablesRelations);
       jspDRFieldsTablesRelations = new JScrollPane(jlDRFieldsTablesRelations);
       jspDRTablesRelatedTo = new JScrollPane(jlDRTablesRelatedTo);
@@ -664,8 +687,10 @@ public class EdgeConvertGUI {
       jpDRCenter.add(jpDRCenter2);
       jpDRCenter.add(jpDRCenter3);
       jpDRCenter.add(jpDRCenter4);
+      jfDR.getContentPane().add(jpDRTop, BorderLayout.NORTH);
       jfDR.getContentPane().add(jpDRCenter, BorderLayout.CENTER);
       jpDRBottom = new JPanel(new GridLayout(1, 3));
+      
 
       jbDRDefineTables = new JButton(DEFINE_TABLES);
       jbDRDefineTables.addActionListener(
@@ -1305,7 +1330,15 @@ public class EdgeConvertGUI {
                                                 "c 2018");
          }
          if ((ae.getSource() == jmiDTHelpOutput) || (ae.getSource() == jmiDRHelpOutput)){
-            JOptionPane.showMessageDialog(null, "Add text here");
+            JOptionPane.showMessageDialog(null, "The System allows for changing the default Output directory." +
+                    "\n In order to do so, click the 'Options' tab and then 'Set Output File Definition Location'. \n" +
+                    "A File Explorer will then display, and you can sift through your folders to find your specific Output Directory.\n" +
+                    "--Note: An error is thrown if you select a folder not containing a DDL Output file.--\n" +
+                    "Upon pressing 'OK', the Output location shall change, and all other activities completed will finish in the selected" +
+                    "directory.");
+         }
+         if ((ae.getSource() == jmiDTHelpEdge) || (ae.getSource() == jmiDRHelpEdge)){
+            JOptionPane.showMessageDialog(null, "To open an edge file go to File->Open Edge File then use the popup pane to find and select your .edg file.");
          }
       } // EdgeMenuListener.actionPerformed()
    } // EdgeMenuListener
