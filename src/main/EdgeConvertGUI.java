@@ -979,6 +979,12 @@ public class EdgeConvertGUI {
          outputDir = jfcOutputDir.getSelectedFile();
       }
 
+      if (returnVal == JFileChooser.DIRECTORIES_ONLY) {               
+         //outputDir = jfcOutputDir.getSelectedFile();            
+         jfcOutputDir.getCurrentDirectory();
+
+      }    
+
       getOutputClasses();
 
       if (alProductNames.size() == 0) {
@@ -1237,6 +1243,14 @@ public class EdgeConvertGUI {
                truncatedFilename = parseFile.getName().substring(parseFile.getName().lastIndexOf(File.separator) + 1);
                jfDT.setTitle(DEFINE_TABLES + " - " + truncatedFilename);
                jfDR.setTitle(DEFINE_RELATIONS + " - " + truncatedFilename);
+            } else if (returnVal == JFileChooser.DIRECTORIES_ONLY) {
+               //jfcOutputDir.getCurrentDirectory();
+               
+               jfcOutputDir.changeToParentDirectory();
+               //outputDir = jfcOutputDir.getCurrentDirectory().changeToParentDirectory();         
+                      
+               jfcOutputDir.setApproveButtonText("Default");                                          
+            
             } else {
                return;
             }
