@@ -68,6 +68,6 @@ public abstract class EdgeConvertCreateDDL {
    
    public abstract String getSQLString();
    
-   public abstract void createDDL();
+   public abstract void createDDL(Runnable runnable);
    
 }//EdgeConvertCreateDDL

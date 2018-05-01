@@ -46,7 +46,7 @@ public class EdgeTable {
       alNativeFields.add(new Integer(value));
    }
 
-   public void moveFieldUp(int index) { //move the field closer to the beginning of the list
+/*   public void moveFieldUp(int index) { //move the field closer to the beginning of the list
       if (index == 0) {
          return;
       }
@@ -57,7 +57,7 @@ public class EdgeTable {
       relatedFields[index - 1] = relatedFields[index]; //copy target element to destination
       relatedFields[index] = tempRelated; //copy saved element to target's original location
    }
-   
+
    public void moveFieldDown(int index) { //move the field closer to the end of the list
       if (index == (nativeFields.length - 1)) {
          return;
@@ -67,6 +67,29 @@ public class EdgeTable {
       nativeFields[index] = tempNative; //copy saved element to target's original location
       int tempRelated = relatedFields[index + 1]; //save element at destination index
       relatedFields[index + 1] = relatedFields[index]; //copy target element to destination
+      relatedFields[index] = tempRelated; //copy saved element to target's original location
+   }*/
+
+   //Generic function for moving a field up or down
+   public void moveField(String direction, int index){
+      int uIndex = 0;
+      if(direction == "up"){
+         uIndex = index - 1;
+      }
+      if(direction == "down"){
+         uIndex = index + 1;
+      }
+      if (index == 0) {
+         return;
+      }
+      if (index == (nativeFields.length - 1)) {
+         return;
+      }
+      int tempNative = nativeFields[uIndex]; //save element at destination index
+      nativeFields[uIndex] = nativeFields[index]; //copy target element to destination
+      nativeFields[index] = tempNative; //copy saved element to target's original location
+      int tempRelated = relatedFields[uIndex]; //save element at destination index
+      relatedFields[uIndex] = relatedFields[index]; //copy target element to destination
       relatedFields[index] = tempRelated; //copy saved element to target's original location
    }
 

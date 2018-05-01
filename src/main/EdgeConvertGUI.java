@@ -268,7 +268,7 @@ public class EdgeConvertGUI {
          new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                int selection = jlDTFieldsTablesAll.getSelectedIndex();
-               currentDTTable.moveFieldUp(selection);
+               currentDTTable.moveField("up", selection);
                //repopulate Fields List
                int[] currentNativeFields = currentDTTable.getNativeFieldsArray();
                jlDTFieldsTablesAll.clearSelection();
@@ -287,7 +287,7 @@ public class EdgeConvertGUI {
          new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                int selection = jlDTFieldsTablesAll.getSelectedIndex(); //the original selected index
-               currentDTTable.moveFieldDown(selection);
+               currentDTTable.moveField("down", selection);
                //repopulate Fields List
                int[] currentNativeFields = currentDTTable.getNativeFieldsArray();
                jlDTFieldsTablesAll.clearSelection();

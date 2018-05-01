@@ -223,20 +223,30 @@ public class EdgeConvertFileParser {
       EdgeField tempField;
       currentLine = br.readLine();
       currentLine = br.readLine(); //this should be "Table: "
+      TableParse();
+      GetNextToken();
+   } // parseSaveFile()
+
+   //Function made to reduce the size of parseSaveFile. initializes the table and the params
+   public void TableParse() throws IOException {
+      EdgeTable tempTable;
+      StringTokenizer stNatFields;
+      StringTokenizer stTables;
+      StringTokenizer stRelFields;
       while (currentLine.startsWith("Table: ")) {
          numFigure = Integer.parseInt(currentLine.substring(currentLine.indexOf(" ") + 1)); //get the Table number
          currentLine = br.readLine(); //this should be "{"
          currentLine = br.readLine(); //this should be "TableName"
          tableName = currentLine.substring(currentLine.indexOf(" ") + 1);
          tempTable = new EdgeTable(numFigure + DELIM + tableName);
-         
+
          currentLine = br.readLine(); //this should be the NativeFields list
          stNatFields = new StringTokenizer(currentLine.substring(currentLine.indexOf(" ") + 1), DELIM);
          numFields = stNatFields.countTokens();
          for (int i = 0; i < numFields; i++) {
             tempTable.addNativeField(Integer.parseInt(stNatFields.nextToken()));
          }
-         
+
          currentLine = br.readLine(); //this should be the RelatedTables list
          stTables = new StringTokenizer(currentLine.substring(currentLine.indexOf(" ") + 1), DELIM);
          numTables = stTables.countTokens();
@@ -244,7 +254,7 @@ public class EdgeConvertFileParser {
             tempTable.addRelatedTable(Integer.parseInt(stTables.nextToken()));
          }
          tempTable.makeArrays();
-         
+
          currentLine = br.readLine(); //this should be the RelatedFields list
          stRelFields = new StringTokenizer(currentLine.substring(currentLine.indexOf(" ") + 1), DELIM);
          numFields = stRelFields.countTokens();
@@ -258,6 +268,12 @@ public class EdgeConvertFileParser {
          currentLine = br.readLine(); //this should be "\n"
          currentLine = br.readLine(); //this should be either the next "Table: ", #Fields#
       }
+   }
+
+   //Reduces the size of saveparsefile. Simply gets the next token to be read in the file
+   public void GetNextToken() throws IOException {
+      StringTokenizer stField;
+      EdgeField tempField;
       while ((currentLine = br.readLine()) != null) {
          stField = new StringTokenizer(currentLine, DELIM);
          numFigure = Integer.parseInt(stField.nextToken());
@@ -275,7 +291,9 @@ public class EdgeConvertFileParser {
          }
          alFields.add(tempField);
       }
-   } // parseSaveFile()
+   }
+
+
 
    private void makeArrays() { //convert ArrayList objects into arrays of the appropriate Class type
       if (alTables != null) {

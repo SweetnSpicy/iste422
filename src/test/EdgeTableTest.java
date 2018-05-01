@@ -112,7 +112,7 @@ public class EdgeTableTest {
         defaultTest.addRelatedTable(2);
         defaultTest.addNativeField(2);
         defaultTest.makeArrays();
-        defaultTest.moveFieldUp(1);
+        defaultTest.moveField("up", 1);
         int [] aray = defaultTest.getRelatedFieldsArray();
         assertEquals("Should have returned the field we just made, 2", 2, aray[0]);
     }
@@ -128,7 +128,7 @@ public class EdgeTableTest {
         defaultTest.addRelatedTable(2);
         defaultTest.addNativeField(2);
         defaultTest.makeArrays();
-        defaultTest.moveFieldDown(0);
+        defaultTest.moveField("down", 0);
         int [] aray = defaultTest.getRelatedFieldsArray();
         assertEquals("Should have returned the field we just made, 2", 2, aray[0]);
     }
