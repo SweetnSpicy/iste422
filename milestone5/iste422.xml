@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="iste422" default="all">
+  
+  
+  <property file="iste422.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <fileset dir="${javac2.home}">
+      <include name="javac2.jar"/>
+      <include name="jdom.jar"/>
+      <include name="asm-all*.jar"/>
+      <include name="jgoodies-forms.jar"/>
+    </fileset>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module iste422 -->
+  
+  <dirname property="module.iste422.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.iste422" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.iste422" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.iste422" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.iste422" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="iste422.output.dir" value="${module.iste422.basedir}/out/production/iste422"/>
+  <property name="iste422.testoutput.dir" value="${module.iste422.basedir}/out/test/iste422"/>
+  
+  <path id="iste422.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="iste422.module.production.classpath">
+    <path refid="${module.jdk.classpath.iste422}"/>
+  </path>
+  
+  <path id="iste422.runtime.production.module.classpath">
+    <pathelement location="${iste422.output.dir}"/>
+  </path>
+  
+  <path id="iste422.module.classpath">
+    <path refid="${module.jdk.classpath.iste422}"/>
+    <pathelement location="${iste422.output.dir}"/>
+  </path>
+  
+  <path id="iste422.runtime.module.classpath">
+    <pathelement location="${iste422.testoutput.dir}"/>
+    <pathelement location="${iste422.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.iste422">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.iste422">
+    <patternset refid="excluded.from.module.iste422"/>
+  </patternset>
+  
+  <path id="iste422.module.sourcepath">
+    <dirset dir="${module.iste422.basedir}/src">
+      <include name="main"/>
+    </dirset>
+  </path>
+  
+  <path id="iste422.module.test.sourcepath">
+    <dirset dir="${module.iste422.basedir}/src">
+      <include name="test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.iste422" depends="compile.module.iste422.production,compile.module.iste422.tests" description="Compile module iste422"/>
+  
+  <target name="compile.module.iste422.production" depends="register.custom.compilers" description="Compile module iste422; production classes">
+    <mkdir dir="${iste422.output.dir}"/>
+    <javac2 destdir="${iste422.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.iste422}/javac">
+      <compilerarg line="${compiler.args.iste422}"/>
+      <bootclasspath refid="iste422.module.bootclasspath"/>
+      <classpath refid="iste422.module.production.classpath"/>
+      <src refid="iste422.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.iste422"/>
+    </javac2>
+    
+    <copy todir="${iste422.output.dir}">
+      <fileset dir="${module.iste422.basedir}/src/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.iste422.tests" depends="register.custom.compilers,compile.module.iste422.production" description="compile module iste422; test classes" unless="skip.tests">
+    <mkdir dir="${iste422.testoutput.dir}"/>
+    <javac2 destdir="${iste422.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.iste422}/javac">
+      <compilerarg line="${compiler.args.iste422}"/>
+      <bootclasspath refid="iste422.module.bootclasspath"/>
+      <classpath refid="iste422.module.classpath"/>
+      <src refid="iste422.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.iste422"/>
+    </javac2>
+    
+    <copy todir="${iste422.testoutput.dir}">
+      <fileset dir="${module.iste422.basedir}/src/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.iste422" description="cleanup module">
+    <delete dir="${iste422.output.dir}"/>
+    <delete dir="${iste422.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.iste422" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.iste422" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.fail:jar" value="${basedir}/out/artifacts/fail_jar"/>
+    <property name="artifact.output.iste422:jar" value="${basedir}/out/artifacts/iste422_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.fail_jar.apk" value="${artifacts.temp.dir}/fail_jar.apk"/>
+    <property name="temp.jar.path.iste422.jar" value="${artifacts.temp.dir}/iste422.jar"/>
+  </target>
+  
+  <target name="artifact.fail:jar" depends="init.artifacts" description="Build &#39;fail:jar&#39; artifact">
+    <property name="artifact.temp.output.fail:jar" value="${artifacts.temp.dir}/fail_jar"/>
+    <mkdir dir="${artifact.temp.output.fail:jar}"/>
+    <zip destfile="${temp.jar.path.fail_jar.apk}"/>
+    <copy file="${temp.jar.path.fail_jar.apk}" tofile="${artifact.temp.output.fail:jar}/fail_jar.apk"/>
+  </target>
+  
+  <target name="artifact.iste422:jar" depends="init.artifacts, compile.module.iste422" description="Build &#39;iste422:jar&#39; artifact">
+    <property name="artifact.temp.output.iste422:jar" value="${artifacts.temp.dir}/iste422_jar"/>
+    <mkdir dir="${artifact.temp.output.iste422:jar}"/>
+    <jar destfile="${temp.jar.path.iste422.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${iste422.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.iste422.jar}" tofile="${artifact.temp.output.iste422:jar}/iste422.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.fail:jar, artifact.iste422:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.fail:jar}"/>
+    <copy todir="${artifact.output.fail:jar}">
+      <fileset dir="${artifact.temp.output.fail:jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.iste422:jar}"/>
+    <copy todir="${artifact.output.iste422:jar}">
+      <fileset dir="${artifact.temp.output.iste422:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

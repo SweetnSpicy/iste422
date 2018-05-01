@@ -1,0 +1,8 @@
+git checkout [branch]- switch to a branch
+git branch [name] - create a new branch
+git merge [branch] - merge a branch with current
+git commit - commit changes to branch
+git push - push changes to repository
+git fetch - adds newest changes to local repo
+git pull - fetch then merge with new changes
+git clone [url] - initialize a directory as a remote repo

@@ -1,0 +1,52 @@
+<project name="EdgeConvert" default="run" basedir=".">
+  <!-- erase old build -->
+  <target name="clean" description="erase old build">
+    <delete>
+      <fileset dir="bin" includes="**/*.class" />
+    </delete>
+  </target>
+
+  <!-- compile code -->
+  <target name="compile" depends="clean" description="compile the code">
+    <javac
+      srcdir="src/main"
+      destdir="bin/build"
+      verbose="true">
+    </javac>
+  </target>
+
+  <!-- run program -->
+  <target name="run" depends="compile" description="run the program">
+    <java
+      classname="RunEdgeConvert"
+      fork="true"
+      classpath="bin/build">
+
+    </java>
+  </target>
+
+  <!-- testing classpath -->
+  <path id="junit.class.path">
+    <pathelement location="lib/junit-4.12.jar" />
+    <pathelement location="lib/hamcrest-core-1.3.jar" />
+  </path>
+
+  <!-- compile test code -->
+  <target name="test.compile" depends="clean" description="compile the test">
+    <javac
+      srcdir="src"
+      destdir="bin/test"
+      verbose="true">
+      <classpath refid="junit.class.path" />
+    </javac>
+  </target>
+
+  <!-- run the test -->
+  <target name="test" depends="test.compile" description="run the tests">
+    <junit>
+      <classpath refid="junit.class.path" />
+      <formatter type="brief" usefile="false" />
+      <test name="EdgeFieldTest" fork="true" />
+    </junit>
+  </target>
+</project>

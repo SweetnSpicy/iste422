@@ -1,0 +1,3 @@
+edgedb.courses                                     OK
+edgedb.faculty                                     OK
+edgedb.student                                     OK
